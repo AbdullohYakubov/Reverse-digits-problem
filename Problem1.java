@@ -21,5 +21,6 @@ public class Problem1{
         }
 
         System.out.println("The reversed number is: " + rev);
+        scr.close();
     }    
 }

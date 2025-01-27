@@ -9,37 +9,37 @@ import java.util.Scanner;
 
 public class Problem2 {
     public static void main(String[] args){
-        Scanner scr = new Scanner(System.in);
-        System.out.println("Please enter the prices for the seven days:");
+        System.out.println("The max profit is: " + returnMaxProfit());
+    }
 
-        int[] prices = new int[7];
-        int maxVal = 0;
-        int dayToSell = 0;
+    public static int returnMaxProfit(){
+        Scanner scr = new Scanner(System.in);
+        System.out.println("For how many days do you want to enter prices?");
+        int numOfDays = scr.nextInt();
+        System.out.println("Please enter the prices for the " + numOfDays + " days:");
+
+        int[] prices = new int[numOfDays];
         int minVal = 1000000000;
-        int dayToBuy = 0;
+        int maxProfit = 0;
+
+        if(numOfDays <= 2){
+            scr.close();
+            return 0;
+        }
         
         for(int i = 0; i < prices.length; i++){
             prices[i] = scr.nextInt();
 
-            if(prices[i] > maxVal){
-                maxVal = prices[i];
-                dayToSell = i;
-            }
-
             if(prices[i] < minVal){
                 minVal = prices[i];
-                dayToBuy = i;
+            }
+
+            if((prices[i] - minVal) > maxProfit){
+                maxProfit = prices[i] - minVal;
             }
         }
-       
-        System.out.println("The maximum profit is: " + returnProfit(maxVal, minVal, dayToBuy, dayToSell));
-    }
 
-    public static int returnProfit(int _maxVal, int _minVal, int _dayToBuy, int _dayToSell){
-        if(_maxVal > _minVal && _dayToSell > _dayToBuy){
-            return _maxVal - _minVal;
-        }else{
-            return 0;
-        }
+        scr.close();
+        return maxProfit;
     }
 }
