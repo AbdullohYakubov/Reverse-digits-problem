@@ -9,21 +9,24 @@ import java.util.Scanner;
 
 public class Problem2 {
     public static void main(String[] args){
-        System.out.println("The max profit is: " + returnMaxProfit());
+        System.out.println("The maximum profit you can make by buying and selling the product throughout these consecutive days is: " + returnMaxProfit());
     }
 
     public static int returnMaxProfit(){
         Scanner scr = new Scanner(System.in);
         System.out.println("For how many days do you want to enter prices?");
         int numOfDays = scr.nextInt();
-        System.out.println("Please enter the prices for the " + numOfDays + " days:");
+
+        System.out.println("Please enter the prices for " + numOfDays + " days:");
 
         int[] prices = new int[numOfDays];
-        int minVal = 1000000000;
+        int minVal = Integer.MAX_VALUE;
         int maxProfit = 0;
+        int tempProfit = 0;
 
-        if(numOfDays <= 2){
+        if(numOfDays <= 1){
             scr.close();
+            System.out.println("Invalid number of days! You need at least 2 days to buy and sell the product.");
             return 0;
         }
         
@@ -34,8 +37,9 @@ public class Problem2 {
                 minVal = prices[i];
             }
 
-            if((prices[i] - minVal) > maxProfit){
-                maxProfit = prices[i] - minVal;
+            tempProfit = prices[i] - minVal;
+            if(tempProfit > maxProfit){
+                maxProfit = tempProfit;
             }
         }
 
